@@ -2,11 +2,16 @@ package com.testpapers.nar.cgltestpapers;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.text.style.QuoteSpan;
+
 import net.sqlcipher.database.SQLiteDatabase;
 import net.sqlcipher.database.SQLiteException;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+
+import Entities.Question;
 
 /**
  * Created by nar on 5/10/2017.
@@ -44,7 +49,27 @@ public class DatabaseAdapter {
 
     public void ShowAllColumns()
     {
-        SQLiteDatabase db = m DBHelper.getWritableDatabase(DatabaseHelper.pwd);
+        SQLiteDatabase db = mDBHelper.getWritableDatabase(DatabaseHelper.pwd);
+        if(db == null)
+            return;
+
+        String[] columns = { DatabaseContract.DatabaseEntry._ID, DatabaseContract.DatabaseEntry.SECOND_COLUMN};
+        Cursor cursor = db.query(DatabaseContract.DatabaseEntry.TABLE_NAME, columns, null, null, null, null, null);
+
+        String allData = "";
+        while(cursor.moveToNext())
+        {
+            String idString = cursor.getString(cursor.getColumnIndex(DatabaseContract.DatabaseEntry._ID));
+            String name = cursor.getString(cursor.getColumnIndex(DatabaseContract.DatabaseEntry.SECOND_COLUMN));
+
+            allData += idString + " " + name + "\n";
+        }
+
+    }
+
+    public ArrayList<Question> GetAllQuestions()
+    {
+        SQLiteDatabase db = mDBHelper.getWritableDatabase(DatabaseHelper.pwd);
         if(db == null)
             return;
 
