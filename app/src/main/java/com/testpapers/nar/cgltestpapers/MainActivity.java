@@ -4,6 +4,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
+import Entities.Question;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        dbAdapter.ShowAllColumns();
+        ArrayList<Question> questions = dbAdapter.GetAllQuestions();
         dbAdapter.close();
 
 

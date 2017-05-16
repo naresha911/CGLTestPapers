@@ -24,7 +24,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String TAG = "DatabaseHelper";
     public static final int DATABASE_VERSION = 1;
-    public static final String DATABASE_NAME = "customers.db";
+    public static final String DATABASE_NAME = "TestPapers.db";
     public static final String Text_TYPE = "TEXT";
     public static final String DATABASE_PATH = "/data/data/com.testpapers.nar.cgltestpapers/databases/";;
     public static final String pwd = "fantastic@1";

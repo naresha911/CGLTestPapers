@@ -9,6 +9,7 @@ import net.sqlcipher.database.SQLiteException;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import Entities.Question;
@@ -47,43 +48,32 @@ public class DatabaseAdapter {
             mDBHelper.close();
     }
 
-    public void ShowAllColumns()
-    {
-        SQLiteDatabase db = mDBHelper.getWritableDatabase(DatabaseHelper.pwd);
-        if(db == null)
-            return;
-
-        String[] columns = { DatabaseContract.DatabaseEntry._ID, DatabaseContract.DatabaseEntry.SECOND_COLUMN};
-        Cursor cursor = db.query(DatabaseContract.DatabaseEntry.TABLE_NAME, columns, null, null, null, null, null);
-
-        String allData = "";
-        while(cursor.moveToNext())
-        {
-            String idString = cursor.getString(cursor.getColumnIndex(DatabaseContract.DatabaseEntry._ID));
-            String name = cursor.getString(cursor.getColumnIndex(DatabaseContract.DatabaseEntry.SECOND_COLUMN));
-
-            allData += idString + " " + name + "\n";
-        }
-
-    }
-
     public ArrayList<Question> GetAllQuestions()
     {
+        ArrayList<Question> allData = new ArrayList<>();
+
         SQLiteDatabase db = mDBHelper.getWritableDatabase(DatabaseHelper.pwd);
         if(db == null)
-            return;
+            return allData;
 
-        String[] columns = { DatabaseContract.DatabaseEntry._ID, DatabaseContract.DatabaseEntry.SECOND_COLUMN};
+        String[] columns = { DatabaseContract.DatabaseEntry._ID,
+                DatabaseContract.DatabaseEntry.QUESTION,
+                DatabaseContract.DatabaseEntry.OPTIONS,
+                DatabaseContract.DatabaseEntry.ANSWER};
         Cursor cursor = db.query(DatabaseContract.DatabaseEntry.TABLE_NAME, columns, null, null, null, null, null);
 
-        String allData = "";
         while(cursor.moveToNext())
         {
             String idString = cursor.getString(cursor.getColumnIndex(DatabaseContract.DatabaseEntry._ID));
-            String name = cursor.getString(cursor.getColumnIndex(DatabaseContract.DatabaseEntry.SECOND_COLUMN));
+            String question = cursor.getString(cursor.getColumnIndex(DatabaseContract.DatabaseEntry.QUESTION));
+            String options = cursor.getString(cursor.getColumnIndex(DatabaseContract.DatabaseEntry.OPTIONS));
+            String answer = cursor.getString(cursor.getColumnIndex(DatabaseContract.DatabaseEntry.ANSWER));
 
-            allData += idString + " " + name + "\n";
+            Question questionEntity = new Question(question, options, answer);
+            allData.add(questionEntity);
         }
+
+        return allData;
 
     }
 
