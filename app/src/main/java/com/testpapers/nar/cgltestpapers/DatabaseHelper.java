@@ -51,10 +51,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void CreateDatabase() throws IOException
     {
         boolean checkDb = CheckDatabaseExists();
+        File dbFile = new File(DATABASE_FULL_PATH);
+        if(dbFile.exists())
+            dbFile.delete();
         if(checkDb == false)
         {
-            SQLiteDatabase db = SQLiteDatabase.openOrCreateDatabase(DATABASE_FULL_PATH, pwd, null);
+            /*File dbPathFile = new File(dbPath);
+            if (!dbPathFile.exists())
+                dbPathFile.getParentFile().mkdirs();*/
+
+            SQLiteDatabase db = getReadableDatabase(pwd);
             db.close();
+            //db = SQLiteDatabase.openOrCreateDatabase(DATABASE_FULL_PATH, pwd, null);
+            //db.close();
             try{
                 copyDataBase();
                 Log.e(TAG, "createDatabase database created");

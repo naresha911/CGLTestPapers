@@ -32,4 +32,9 @@ public class Question {
     {
         return mAnswers;
     }
+
+    public String toString()
+    {
+        return (mQuestion);
+    }
 }
