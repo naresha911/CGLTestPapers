@@ -1,0 +1,35 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="fragments.HomeScreen">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/testpapers"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@color/colorPrimary"
+            android:text="Test Papers"
+            android:textColor="@color/common_google_signin_btn_text_dark_default"
+            android:textColorHighlight="@color/colorAccent"
+            android:textSize="30sp" />
+
+        <Button
+            android:id="@+id/analyze"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="#FFBB00"
+            android:text="Analyze"
+            android:textColor="@color/common_google_signin_btn_text_dark_default"
+            android:textSize="30sp" />
+    </LinearLayout>
+</FrameLayout>
