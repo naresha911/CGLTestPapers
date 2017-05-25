@@ -59,7 +59,8 @@ public class DatabaseAdapter {
         String[] columns = { DatabaseContract.DatabaseEntry._ID,
                 DatabaseContract.DatabaseEntry.QUESTION,
                 DatabaseContract.DatabaseEntry.OPTIONS,
-                DatabaseContract.DatabaseEntry.ANSWER};
+                DatabaseContract.DatabaseEntry.ANSWER,
+                DatabaseContract.DatabaseEntry.YEAR};
         Cursor cursor = db.query(DatabaseContract.DatabaseEntry.TABLE_NAME, columns, null, null, null, null, null);
 
         while(cursor.moveToNext())
@@ -73,7 +74,42 @@ public class DatabaseAdapter {
             allData.add(questionEntity);
         }
 
+        db.close();
         return allData;
+    }
+
+    public ArrayList<Question> GetQuestionsForGivenColumn(String columnName)
+    {
+        ArrayList<Question> questions = new ArrayList<>();
+
+        SQLiteDatabase db = mDBHelper.getReadableDatabase(DatabaseHelper.pwd);
+        if(db == null)
+            return null;
+
+        String[] columns = { DatabaseContract.DatabaseEntry._ID,
+                DatabaseContract.DatabaseEntry.QUESTION,
+                DatabaseContract.DatabaseEntry.OPTIONS,
+                DatabaseContract.DatabaseEntry.ANSWER,
+                DatabaseContract.DatabaseEntry.YEAR};
+
+        String whereClause = "_year = ?";
+        String whereArgs[] = {columnName};
+
+        Cursor cursor = db.query(DatabaseContract.DatabaseEntry.TABLE_NAME, columns, whereClause, whereArgs, null, null, null);
+
+        while(cursor.moveToNext())
+        {
+            String idString = cursor.getString(cursor.getColumnIndex(DatabaseContract.DatabaseEntry._ID));
+            String question = cursor.getString(cursor.getColumnIndex(DatabaseContract.DatabaseEntry.QUESTION));
+            String options = cursor.getString(cursor.getColumnIndex(DatabaseContract.DatabaseEntry.OPTIONS));
+            String answer = cursor.getString(cursor.getColumnIndex(DatabaseContract.DatabaseEntry.ANSWER));
+
+            Question questionEntity = new Question(question, options, answer);
+            questions.add(questionEntity);
+        }
+
+        db.close();
+        return questions;
 
     }
 

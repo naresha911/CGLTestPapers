@@ -12,5 +12,6 @@ public final class DatabaseContract {
         public static final String QUESTION = "_question";
         public static final String OPTIONS = "_options";
         public static final String ANSWER = "_answer";
+        public static final String YEAR = "_year";
     }
 }

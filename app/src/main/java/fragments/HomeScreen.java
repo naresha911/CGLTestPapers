@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.testpapers.nar.cgltestpapers.MainActivity;
 import com.testpapers.nar.cgltestpapers.R;
 
 public class HomeScreen extends Fragment {
@@ -40,7 +41,7 @@ public class HomeScreen extends Fragment {
         mTestPapersBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "TestPapers", Toast.LENGTH_SHORT).show();
+                ((MainActivity)getActivity()).OnTestPapersButtonClicked();
             }
         });
 

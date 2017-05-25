@@ -50,10 +50,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public void CreateDatabase() throws IOException
     {
-        boolean checkDb = CheckDatabaseExists();
         File dbFile = new File(DATABASE_FULL_PATH);
         if(dbFile.exists())
             dbFile.delete();
+        boolean checkDb = CheckDatabaseExists();
         if(checkDb == false)
         {
             /*File dbPathFile = new File(dbPath);
