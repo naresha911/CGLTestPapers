@@ -50,10 +50,25 @@ public class MainActivity extends AppCompatActivity {
     public void OnTestPapersButtonClicked()
     {
         SearchListFragment searchListFragment = new SearchListFragment();
+
+        DatabaseAdapter dbAdapter = new DatabaseAdapter(this);
+        try {
+            dbAdapter.open();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        if(dbAdapter == null)
+            return;
+
+        ArrayList<String> yearStrings = dbAdapter.GetColumnData(DatabaseContract.DatabaseEntry.YEAR);
+        dbAdapter.close();
+
+        searchListFragment.SetYearStrings(yearStrings);
         ReplaceFragment(searchListFragment, SearchListFragment.class.getSimpleName() );
     }
 
-    public void OnSubmitButtonclicked(int year)
+    public void OnSubmitButtonclicked(String year)
     {
         DatabaseAdapter dbAdapter = new DatabaseAdapter(this);
         try {
@@ -65,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         if(dbAdapter == null)
             return;
 
-        ArrayList<Question> questions = dbAdapter.GetQuestionsForGivenColumn("2015");
+        ArrayList<Question> questions = dbAdapter.GetQuestionsForGivenColumn(year);
         dbAdapter.close();
 
         QuestionViewFragment questionViewFragment = new QuestionViewFragment();

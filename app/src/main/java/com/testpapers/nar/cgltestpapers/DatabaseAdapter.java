@@ -113,4 +113,27 @@ public class DatabaseAdapter {
 
     }
 
+    public ArrayList<String> GetColumnData(String columnName)
+    {
+        ArrayList<String> columnData = new ArrayList<>();
+
+        SQLiteDatabase db = mDBHelper.getReadableDatabase(DatabaseHelper.pwd);
+        if(db == null)
+            return null;
+
+        String[] columns = {columnName};
+
+        Cursor cursor = db.query(true,DatabaseContract.DatabaseEntry.TABLE_NAME, columns, null, null, null, null, columnName+" DESC",null);
+
+        while(cursor.moveToNext())
+        {
+            String columnString = cursor.getString(cursor.getColumnIndex(columnName));
+            columnData.add(columnString);
+        }
+
+        db.close();
+        return columnData;
+
+    }
+
 }

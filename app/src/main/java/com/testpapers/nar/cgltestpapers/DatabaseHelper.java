@@ -56,14 +56,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         boolean checkDb = CheckDatabaseExists();
         if(checkDb == false)
         {
-            /*File dbPathFile = new File(dbPath);
+            File dbPathFile = new File(DATABASE_FULL_PATH);
             if (!dbPathFile.exists())
-                dbPathFile.getParentFile().mkdirs();*/
+                dbPathFile.getParentFile().mkdirs();
 
-            SQLiteDatabase db = getReadableDatabase(pwd);
+            SQLiteDatabase db = SQLiteDatabase.openOrCreateDatabase(DATABASE_FULL_PATH, pwd, null);
             db.close();
-            //db = SQLiteDatabase.openOrCreateDatabase(DATABASE_FULL_PATH, pwd, null);
-            //db.close();
+
             try{
                 copyDataBase();
                 Log.e(TAG, "createDatabase database created");
