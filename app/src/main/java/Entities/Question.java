@@ -35,6 +35,17 @@ public class Question {
 
     public String toString()
     {
-        return (mQuestion);
+        String question = mQuestion;
+
+        String optionsStr = "";
+        for(int ii = 0; ii < mOptions.length; ++ii)
+        {
+            if(ii%2 == 0)
+                optionsStr += "\n";
+            optionsStr += mOptions[ii] + "\t";
+        }
+
+        question += optionsStr;
+        return (question);
     }
 }

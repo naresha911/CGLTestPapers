@@ -24,27 +24,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         AddHomeScreenFragment();
-
-
-
-       /* DatabaseAdapter dbAdapter = new DatabaseAdapter(this);
-        try {
-            dbAdapter.open();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        //Get list of items
-        ArrayList<Question> questions = dbAdapter.GetAllQuestions();
-        dbAdapter.close();
-
-        //Build adapter
-        ArrayAdapter<Question> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
-        arrayAdapter.addAll(questions);
-
-        //Configure list view
-        ListView listView = (ListView) findViewById(R.id.listview);
-        listView.setAdapter(arrayAdapter);*/
     }
 
     public void OnTestPapersButtonClicked()
